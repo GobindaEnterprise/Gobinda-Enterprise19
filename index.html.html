@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOBINDA ENTERPRISE - Premium Crab & Fish Management System</title>
+  <style>
+    /* Reset and Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* TOP YELLOW BAR - MAIN NAVIGATION */
+    .top-yellow-bar {
+      background: linear-gradient(90deg, #ffeb3b, #ffc107, #ff9800);
+      color: #333;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #ff5722;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 4px 20px rgba(255, 193, 7, 0.5); }
+      100% { box-shadow: 0 4px 30px rgba(255, 87, 34, 0.7); }
+    }
+
+    /* LOGO AREA - ENHANCED */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 3px solid #ff5722;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .logo-gb {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #ff0000, #ff5722);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 87, 34, 0.7);
+    }
+
+    .logo-gb::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+      animation: shine 3s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .logo-gb span {
+      font-family: 'Georgia', serif;
+      font-weight: 900;
+      font-size: 36px;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .company-name {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .company-name .main-title {
+      font-family: 'Impact', 'Arial Black', sans-serif;
+      font-size: 42px;
+      background: linear-gradient(90deg, #ff0000, #ff5722, #ff9800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 #000, 6px 6px 0 rgba(0, 0, 0, 0.1);
+      animation: textShimmer 2s ease-in-out infinite alternate;
+    }
+
+    .company-name .sub-title {
+      font-size: 14px;
+      color: #333;
+      letter-spacing: 2px;
+      font-weight: bold;
+      margin-top: -5px;
+      text-align: center;
+      background: #ffeb3b;
+      padding: 2px 10px;
+      border-radius: 10px;
+      border: 2px solid #ff5722;
+    }
+
+    @keyframes textShimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* TOP NAVIGATION MENU */
+    .top-nav-menu {
+      display: flex;
+      gap: 25px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 25px;
+      border-radius: 15px;
+      border: 2px solid #ff5722;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-item {
+      padding: 8px 20px;
+      background: linear-gradient(45deg, #ff9800, #ff5722);
+      color: white;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      text-align: center;
+      min-width: 120px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-item:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4);
+      background: linear-gradient(45deg, #ff5722, #ff0000);
+      border-color: white;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(45deg, #ff0000, #ff5722);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(255, 0, 0, 0.8); }
+    }
+
+    /* USER AUTH SECTION */
+    .user-auth-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 25px;
+      border-radius: 15px;
+      border: 2px solid #ff5722;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 15px;
+      background: linear-gradient(45deg, #4CAF50, #2E7D32);
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #2E7D32;
+      border: 2px solid white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .auth-btn {
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .login-btn {
+      background: linear-gradient(45deg, #2196F3, #0D47A1);
+      color: white;
+    }
+
+    .signup-btn {
+      background: linear-gradient(45deg, #9C27B0, #6A1B9A);
+      color: white;
+    }
+
+    .logout-btn {
+      background: linear-gradient(45deg, #f44336, #c62828);
+      color: white;
+    }
+
+    .auth-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      opacity: 0.9;
+    }
+
+    /* MAIN CONTENT WRAPPER */
+    .main-wrapper {
+      background: rgba(255, 255, 255, 0.98);
+      margin: 30px;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      border: 5px solid #ffeb3b;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* KEEP ALL EXISTING STYLES (from your original CSS) */
+    .header {
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr;
+      background: #cfe5f5;
+      padding: 20px;
+      align-items: center;
+      border-bottom: 2px solid #000;
+      margin-top: 20px;
+    }
+
+    .logo-area h1 {
+      margin: 0;
+      color: red;
+      font-size: 42px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 2px #000;
+    }
+
+    .logo-area img {
+      width: 70px;
+      margin-top: 5px;
+    }
+
+    .btn-area {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .btn-area button {
+      background: #cde8b5;
+      border: 1px solid #000;
+      padding: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .summary {
+      background: #fff2cc;
+      border: 2px solid #000;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+      padding: 5px;
+      border-bottom: 1px solid #000;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    .summary-label {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .summary-value {
+      font-weight: bold;
+      color: #333;
+      text-align: right;
+      min-width: 100px;
+    }
+
+    .balance-old-box {
+      border: 1px solid #000;
+      background: white;
+      padding: 2px 5px;
+      display: inline-block;
+      min-width: 80px;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .balance-old-box:hover {
+      background: #f0f8ff;
+    }
+
+    .balance-old-input {
+      width: 80px;
+      border: 1px solid #000;
+      text-align: right;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .action-buttons {
+      display: flex;
+      padding: 10px 20px;
+      background: #e6f2ff;
+      border-bottom: 1px solid #000;
+      gap: 10px;
+    }
+
+    .action-buttons button {
+      padding: 8px 20px;
+      border: 1px solid #000;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .save-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .edit-btn {
+      background: #2196F3;
+      color: white;
+    }
+
+    .delete-btn {
+      background: #f44336;
+      color: white;
+    }
+
+    .search-container {
+      padding: 15px 20px;
+      background: #e6f2ff;
+      border-bottom: 1px solid #000;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: 2px solid #000;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background: white;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #0066cc;
+      box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      background: #fff;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1400px;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 4px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    thead th {
+      background: yellow;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .column-search {
+      width: 100%;
+      border: 1px solid #666;
+      padding: 3px;
+      font-size: 11px;
+      box-sizing: border-box;
+      margin-top: 2px;
+      background: white;
+    }
+
+    .column-search:focus {
+      outline: none;
+      border-color: #0066cc;
+      background: #f0f8ff;
+    }
+
+    tfoot td {
+      background: #eee;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="search"] {
+      width: 100%;
+      border: none;
+      text-align: center;
+      outline: none;
+      background: transparent;
+      font-size: 12px;
+      padding: 3px;
+    }
+
+    input[type="number"]:focus {
+      background: #f0f8ff;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .row-actions button {
+      padding: 3px 6px;
+      border: 1px solid #000;
+      cursor: pointer;
+      font-size: 10px;
+      border-radius: 3px;
+    }
+
+    .row-save {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .row-edit {
+      background: #2196F3;
+      color: white;
+    }
+
+    .row-delete {
+      background: #f44336;
+      color: white;
+    }
+
+    .tabs {
+      display: flex;
+      border-top: 2px solid #000;
+      background: #ddd;
+    }
+
+    .tab {
+      padding: 8px 20px;
+      border-right: 1px solid #000;
+      cursor: pointer;
+      background: #fff;
+      font-weight: bold;
+    }
+
+    .tab.active {
+      background: #cfe5f5;
+    }
+
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+
+    .row-match {
+      background-color: #e6f7ff !important;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 400px;
+      border: 2px solid #000;
+    }
+
+    .modal h2 {
+      margin-top: 0;
+      color: red;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal button {
+      background: #cde8b5;
+      border: 1px solid #000;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal .close {
+      background: #ffcccc;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      padding: 20px;
+      background: #f0f8ff;
+    }
+
+    .card {
+      background: white;
+      border: 2px solid #000;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .card-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .settings-section {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .settings-section h3 {
+      color: #333;
+      font-size: 16px;
+      margin-top: 0;
+    }
+
+    .settings-section label {
+      font-weight: normal;
+      margin-right: 15px;
+    }
+
+    .settings-section input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    input[type="color"] {
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .modal-content {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .tabs-container {
+      display: flex;
+      background: #e6f2ff;
+      padding: 10px 20px;
+      gap: 10px;
+      border-bottom: 1px solid #000;
+    }
+
+    .main-tab {
+      padding: 10px 20px;
+      background: white;
+      border: 1px solid #000;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .main-tab.active {
+      background: #cfe5f5;
+      border-bottom: 3px solid red;
+    }
+
+    .status-pending {
+      background: #ffcc00;
+      color: #000;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .status-completed {
+      background: #4CAF50;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    .status-cancelled {
+      background: #f44336;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+
+    /* Login/Register Modal */
+    .auth-modal {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .auth-modal .modal-content {
+      background: white;
+      border-radius: 20px;
+      width: 400px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 3px solid #ffeb3b;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .auth-form input {
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .auth-form input:focus {
+      border-color: #ff5722;
+      box-shadow: 0 0 10px rgba(255, 87, 34, 0.3);
+      outline: none;
+    }
+
+    .auth-switch {
+      text-align: center;
+      margin-top: 15px;
+      color: #666;
+    }
+
+    .auth-switch a {
+      color: #ff5722;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .auth-switch a:hover {
+      text-decoration: underline;
+    }
+
+    /* Notification System */
+    .notification {
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      background: linear-gradient(45deg, #4CAF50, #2E7D32);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      display: none;
+      animation: slideInRight 0.5s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .top-yellow-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      .logo-container, .top-nav-menu, .user-auth-section {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        min-width: 100px;
+        padding: 8px 15px;
+        font-size: 12px;
+      }
+      
+      .company-name .main-title {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-wrapper {
+        margin: 15px;
+        padding: 15px;
+      }
+      
+      .top-nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        min-width: 80px;
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+      
+      .company-name .main-title {
+        font-size: 24px;
+      }
+      
+      .logo-gb {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .logo-gb span {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP YELLOW BAR WITH AUTH SYSTEM -->
+  <div class="top-yellow-bar">
+    <!-- LOGO AREA -->
+    <div class="logo-container">
+      <div class="logo-gb">
+        <span>GB</span>
+      </div>
+      <div class="company-name">
+        <div class="main-title">GOBINDA ENTERPRISE</div>
+        <div class="sub-title">PREMIUM CRAB & FISH EXPORT</div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <div class="top-nav-menu">
+      <div class="nav-item active" onclick="switchTab('dashboard')">📊 Dashboard</div>
+      <div class="nav-item" onclick="switchTab('sales')">💰 Sales</div>
+      <div class="nav-item" onclick="switchTab('stock')">🦀 Stock</div>
+      <div class="nav-item" onclick="switchTab('purchase')">🛒 Purchase</div>
+      <div class="nav-item" onclick="switchTab('ledger')">📒 Ledger</div>
+      <div class="nav-item" onclick="switchTab('reports')">📈 Reports</div>
+      <div class="nav-item" onclick="openSettings()">⚙️ Settings</div>
+    </div>
+
+    <!-- USER AUTH SECTION -->
+    <div class="user-auth-section">
+      <div class="user-info" id="userInfo" style="display: none;">
+        <div class="user-avatar" id="userAvatar">👤</div>
+        <span id="userName">User</span>
+      </div>
+      <button class="auth-btn login-btn" onclick="openLoginModal()">🔑 Login</button>
+      <button class="auth-btn signup-btn" onclick="openSignupModal()">📝 Sign Up</button>
+      <button class="auth-btn logout-btn" onclick="logout()" style="display: none;" id="logoutBtn">🚪 Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT WRAPPER -->
+  <div class="main-wrapper">
+    <!-- EXISTING CONTENT FROM ORIGINAL FILE -->
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-area">
+        <h1>GOBINDA ENTERPRISE</h1>
+        <img src="./crab.png" alt="Red Crab">
+      </div>
+
+      <div class="btn-area">
+        <button id="pdfBtn">PDF</button>
+        <button id="newAddBtn">New ADD</button>
+        <button id="reportBtn">Report Print</button>
+        <button id="excelBtn">Excel</button>
+        <button id="printBtn">Print</button>
+        <button id="settingBtn">⚙️ Setting</button>
+      </div>
+
+      <!-- Summary section -->
+      <div class="summary">
+        <div class="summary-row">
+          <span class="summary-label">Total Weat</span>
+          <span class="summary-value" id="totalWeat">0.00</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Total Price</span>
+          <span class="summary-value" id="totalPrice">0.00</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Advance Money</span>
+          <span class="summary-value" id="totalAdvance">0.00</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Balance Customer Old Money</span>
+          <span class="summary-value">
+            <div id="balanceOld" class="balance-old-box">0.00</div>
+          </span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Balance Amount</span>
+          <span class="summary-value" id="balanceAmount">0.00</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Now Balance Amount</span>
+          <span class="summary-value" id="nowBalance">0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Tabs -->
+    <div class="tabs-container">
+      <div class="main-tab active" data-tab="dashboard">📊 Dashboard</div>
+      <div class="main-tab" data-tab="sales">💰 Sales</div>
+      <div class="main-tab" data-tab="stock">🦀 Stock</div>
+      <div class="main-tab" data-tab="purchase">🛒 Purchase</div>
+      <div class="main-tab" data-tab="ledger">📒 Ledger</div>
+      <div class="main-tab" data-tab="reports">📈 Reports</div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" class="content-section">
+      <div class="dashboard">
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <h3>Today Sales</h3>
+          <div class="card-value" id="todaySales">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚖️</div>
+          <h3>Today Weight</h3>
+          <div class="card-value" id="todayWeight">0.00 Kg</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📈</div>
+          <h3>Today Profit</h3>
+          <div class="card-value" id="todayProfit">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <h3>Pending Payment</h3>
+          <div class="card-value" id="pendingPayment">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <h3>Total Customer</h3>
+          <div class="card-value" id="totalCustomer">0</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚠️</div>
+          <h3>Stock Alert</h3>
+          <div class="card-value" id="stockAlertValue">0 Items</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🦀</div>
+          <h3>Current Stock</h3>
+          <div class="card-value" id="currentStock">0.00 Kg</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚚</div>
+          <h3>Pending Orders</h3>
+          <div class="card-value" id="pendingOrders">0</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="action-buttons">
+        <button id="quickAddStock">🦀 Add Stock</button>
+        <button id="quickAddCustomer">👥 Add Customer</button>
+        <button id="quickAddSupplier">🛒 Add Supplier</button>
+        <button id="quickAddPurchase">💰 Add Purchase</button>
+        <button id="quickAddSale">📦 Add Sale</button>
+        <button id="quickViewReports">📊 View Reports</button>
+      </div>
+
+      <!-- Recent Transactions Table -->
+      <div class="table-container">
+        <h3 style="padding: 10px 20px; margin: 0; background: #e6f2ff;">Recent Transactions</h3>
+        <table id="recentTransactions">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Customer/Supplier</th>
+              <th>Weight (Kg)</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="recentTransactionsBody">
+            <tr><td colspan="6" style="text-align: center;">No recent transactions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sales Content (Hidden by default) -->
+    <div id="salesContent" class="content-section" style="display: none;">
+      <!-- Sales Table will be loaded here -->
+      <div class="action-buttons">
+        <button id="newSaleBtn">➕ New Sale</button>
+        <button id="exportSalesBtn">✈️ Export Sales</button>
+        <button id="localSalesBtn">🏪 Local Sales</button>
+        <button id="viewInvoiceBtn">📄 View Invoices</button>
+      </div>
+      
+      <!-- Sales Table Container -->
+      <div id="salesTableContainer" class="table-container">
+        <!-- Sales table will be loaded here -->
+      </div>
+    </div>
+
+    <!-- Top Action Buttons -->
+    <div class="action-buttons">
+      <button id="saveAllBtn" class="save-btn">💾 Save All</button>
+      <button id="editAllBtn" class="edit-btn">✏️ Edit All</button>
+      <button id="deleteAllBtn" class="delete-btn">🗑️ Delete All</button>
+    </div>
+
+    <!-- Main Search Box -->
+    <div class="search-container">
+      <input type="search" class="search-box" id="searchInput" placeholder="🔍 Search across all fields...">
+    </div>
+
+    <!-- Main Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>SL NUMBER</th>
+            <th>CODE NUMBER</th>
+            <th>NAME</th>
+            <th>DATE</th>
+            <th>XXL WEAT</th>
+            <th>XXL RATE</th>
+            <th>XL WEAT</th>
+            <th>XL RATE</th>
+            <th>L WEAT</th>
+            <th>L RATE</th>
+            <th>Total Weat</th>
+            <th>Total Price</th>
+            <th>Advance Money</th>
+            <th>ACTIONS</th>
+          </tr>
+          <!-- Search row for column-specific filtering -->
+          <tr class="search-row">
+            <td><input type="search" class="column-search" data-column="0" placeholder="Search SL"></td>
+            <td><input type="search" class="column-search" data-column="1" placeholder="Search Code"></td>
+            <td><input type="search" class="column-search" data-column="2" placeholder="Search Name"></td>
+            <td><input type="search" class="column-search" data-column="3" placeholder="Search Date"></td>
+            <td><input type="search" class="column-search" data-column="4" placeholder="Search XXL Weat"></td>
+            <td><input type="search" class="column-search" data-column="5" placeholder="Search XXL Rate"></td>
+            <td><input type="search" class="column-search" data-column="6" placeholder="Search XL Weat"></td>
+            <td><input type="search" class="column-search" data-column="7" placeholder="Search XL Rate"></td>
+            <td><input type="search" class="column-search" data-column="8" placeholder="Search L Weat"></td>
+            <td><input type="search" class="column-search" data-column="9" placeholder="Search L Rate"></td>
+            <td><input type="search" class="column-search" data-column="10" placeholder="Search Total Weat"></td>
+            <td><input type="search" class="column-search" data-column="11" placeholder="Search Total Price"></td>
+            <td><input type="search" class="column-search" data-column="12" placeholder="Search Advance"></td>
+            <td><button id="clearFilters" style="padding: 3px 6px; font-size: 11px;">Clear Filters</button></td>
+          </tr>
+        </thead>
+
+        <tbody id="dataBody">
+          <!-- Rows will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active">Sheet1</div>
+      <div class="tab">Sheet2</div>
+      <div class="tab">+</div>
+    </div>
+  </div> <!-- End Main Wrapper -->
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal auth-modal" style="display: none;">
+    <div class="modal-content">
+      <h2 style="text-align: center; color: #ff5722;">🔑 Login to GOBINDA ENTERPRISE</h2>
+      <div class="auth-form">
+        <input type="text" id="loginUsername" placeholder="Username or Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button onclick="login()" style="background: linear-gradient(45deg, #2196F3, #0D47A1); color: white; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">Login</button>
+      </div>
+      <div class="auth-switch">
+        Don't have an account? <a onclick="switchToSignup()">Sign up here</a>
+      </div>
+      <div class="modal-buttons">
+        <button onclick="closeLoginModal()" class="close" style="margin-top: 15px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal auth-modal" style="display: none;">
+    <div class="modal-content">
+      <h2 style="text-align: center; color: #9C27B0;">📝 Create Account</h2>
+      <div class="auth-form">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+        <input type="email" id="signupEmail" placeholder="Email Address" required>
+        <input type="text" id="signupUsername" placeholder="Username" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+        <button onclick="signup()" style="background: linear-gradient(45deg, #9C27B0, #6A1B9A); color: white; padding: 12px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">Create Account</button>
+      </div>
+      <div class="auth-switch">
+        Already have an account? <a onclick="switchToLogin()">Login here</a>
+      </div>
+      <div class="modal-buttons">
+        <button onclick="closeSignupModal()" class="close" style="margin-top: 15px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div id="notification" class="notification"></div>
+
+  <!-- KEEP ALL EXISTING MODALS (Settings, Delete, etc.) -->
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal">
+    <div class="modal-content" style="width: 600px; max-height: 80vh; overflow-y: auto;">
+      <h2>⚙️ System Settings</h2>
+      
+      <!-- Section 1: General Settings -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📊 Dashboard Settings</h3>
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; margin-bottom: 5px; font-weight: bold;">Company Name:</label>
+          <input type="text" id="companyName" value="GOBINDA ENTERPRISE" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label style="display: block; margin-bottom: 5px; font-weight: bold;">Default Advance Money:</label>
+          <input type="number" id="defaultAdvance" value="200" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+      </div>
+
+      <!-- Section 2: Stock Management -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">🦀 Crab/Fish Stock Settings</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Default Size Categories:</label>
+            <input type="text" id="sizeCategories" value="Small,Medium,Large" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Quality Grades:</label>
+            <input type="text" id="qualityGrades" value="A,B,C" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <label style="display: block; margin-bottom: 5px;">Stock Alert Threshold (Kg):</label>
+          <input type="number" id="stockAlert" value="50" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+      </div>
+
+      <!-- Section 3: Purchase System -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">💰 Purchase System</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Default Payment Days:</label>
+            <input type="number" id="paymentDays" value="7" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Supplier Bonus %:</label>
+            <input type="number" id="supplierBonus" value="5" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Sales Management -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📦 Sales Settings</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Export Price Multiplier:</label>
+          <input type="number" id="exportMultiplier" value="1.2" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="autoInvoice" checked> Auto Generate Invoice</label>
+        </div>
+      </div>
+
+      <!-- Section 5: Weight Scale -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">⚖️ Weight Scale Integration</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Scale COM Port:</label>
+          <input type="text" id="comPort" value="COM3" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="autoWeight"> Auto Weight Input</label>
+        </div>
+      </div>
+
+      <!-- Section 6: Rate Settings -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📈 Price Settings</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">XXL Rate:</label>
+            <input type="number" id="xxlRate" value="1200" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">XL Rate:</label>
+            <input type="number" id="xlRate" value="1000" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">L Rate:</label>
+            <input type="number" id="lRate" value="800" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7-8: Ledger Settings -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📒 Ledger Settings</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Customer Credit Limit:</label>
+            <input type="number" id="creditLimit" value="50000" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Due Alert Days:</label>
+            <input type="number" id="dueAlertDays" value="30" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 9: Cold Storage -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">❄️ Cold Storage</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Default Temperature (°C):</label>
+          <input type="number" id="storageTemp" value="-18" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label style="display: block; margin-bottom: 5px;">Max Storage Days:</label>
+          <input type="number" id="maxStorageDays" value="90" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+      </div>
+
+      <!-- Section 10: Export System -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">🚚 Export/Transport</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Default Courier:</label>
+          <input type="text" id="defaultCourier" value="Sundarban Courier" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="autoTracking" checked> Auto Generate Tracking ID</label>
+        </div>
+      </div>
+
+      <!-- Section 11: Quality Check -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">✅ Quality Control</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Min Quality Score:</label>
+            <input type="number" id="minQuality" value="7" min="1" max="10" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Reject Threshold (%):</label>
+            <input type="number" id="rejectThreshold" value="10" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 12: Document Settings -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📁 Document Settings</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Invoice Prefix:</label>
+          <input type="text" id="invoicePrefix" value="GOB-" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="autoBackupDocs" checked> Auto Backup Documents</label>
+        </div>
+      </div>
+
+      <!-- Section 13: Staff Management -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">👨‍💼 Staff Settings</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Default Commission %:</label>
+            <input type="number" id="staffCommission" value="3" step="0.1" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Working Hours:</label>
+            <input type="text" id="workingHours" value="8:00-17:00" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 14: Notification -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📲 Notification System</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Alert Before (Days):</label>
+          <input type="number" id="alertDays" value="3" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="smsAlert" checked> Enable SMS Alert</label><br>
+          <label><input type="checkbox" id="emailAlert"> Enable Email Alert</label>
+        </div>
+      </div>
+
+      <!-- Section 15: Report Settings -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">📊 Report Settings</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Profit Margin Target (%):</label>
+          <input type="number" id="profitTarget" value="20" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="autoReport" checked> Auto Daily Report</label>
+        </div>
+      </div>
+
+      <!-- Section 16: Multi Branch -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">🏢 Multi Branch</h3>
+        <div>
+          <label style="display: block; margin-bottom: 5px;">Current Branch Code:</label>
+          <input type="text" id="branchCode" value="BR001" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="syncData" checked> Sync Data Between Branches</label>
+        </div>
+      </div>
+
+      <!-- Section 17: Website & Branding -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">🎨 Website & Branding</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Primary Color:</label>
+            <input type="color" id="primaryColor" value="#cfe5f5" style="width: 100%; padding: 5px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Secondary Color:</label>
+            <input type="color" id="secondaryColor" value="#ff0000" style="width: 100%; padding: 5px; border: 1px solid #000;">
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <label style="display: block; margin-bottom: 5px;">Website Title:</label>
+          <input type="text" id="websiteTitle" value="GOBINDA ENTERPRISE - Premium Crab & Fish Export" style="width: 100%; padding: 8px; border: 1px solid #000;">
+        </div>
+      </div>
+
+      <!-- Section 18: Security -->
+      <div class="settings-section">
+        <h3 style="background: #cfe5f5; padding: 8px; border-radius: 4px; margin: 15px 0 10px 0;">🔐 Security & Backup</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Auto Backup (Hours):</label>
+            <input type="number" id="backupHours" value="24" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px;">Session Timeout (Min):</label>
+            <input type="number" id="sessionTimeout" value="30" style="width: 100%; padding: 8px; border: 1px solid #000;">
+          </div>
+        </div>
+        <div style="margin-top: 10px;">
+          <label><input type="checkbox" id="enableOTP"> Enable OTP Login</label><br>
+          <label><input type="checkbox" id="cloudBackup" checked> Enable Cloud Backup</label>
+        </div>
+      </div>
+
+      <!-- Modal Buttons -->
+      <div class="modal-buttons" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #ccc;">
+        <button id="saveSettings" style="background: #4CAF50; color: white; padding: 10px 30px;">💾 Save All Settings</button>
+        <button id="loadDefaults" style="background: #2196F3; color: white; padding: 10px 30px;">🔄 Load Defaults</button>
+        <button id="closeSettings" class="close" style="padding: 10px 30px;">❌ Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Confirm Delete</h2>
+      <p id="deleteMessage">Are you sure you want to delete ALL records? This action cannot be undone.</p>
+      <div class="modal-buttons">
+        <button id="confirmDelete">Delete</button>
+        <button id="cancelDelete" class="close">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALL ORIGINAL JAVASCRIPT CODE FROM YOUR FILE -->
+  <script>
+    // Global Variables
+    const body = document.getElementById("dataBody");
+    const searchInput = document.getElementById("searchInput");
+    const recentTransactionsBody = document.getElementById("recentTransactionsBody");
+    let tableData = [];
+    let deleteCallback = null;
+    let balanceCustomerOldMoney = 0.00;
+    let columnFilters = {};
+    let dashboardData = {
+      todaySales: 0,
+      todayWeight: 0,
+      todayProfit: 0,
+      pendingPayment: 0,
+      totalCustomer: 0,
+      stockAlertValue: 0,
+      currentStock: 0,
+      pendingOrders: 0,
+      recentTransactions: []
+    };
+
+    // ============ NEW AUTHENTICATION SYSTEM ============
+    let currentUser = null;
+
+    // Check login status on page load
+    function checkAuthStatus() {
+      const userData = localStorage.getItem('gobinda_user');
+      if (userData) {
+        currentUser = JSON.parse(userData);
+        updateAuthUI();
+      }
+    }
+
+    // Update authentication UI
+    function updateAuthUI() {
+      const userInfo = document.getElementById('userInfo');
+      const userName = document.getElementById('userName');
+      const userAvatar = document.getElementById('userAvatar');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const loginBtn = document.querySelector('.login-btn');
+      const signupBtn = document.querySelector('.signup-btn');
+
+      if (currentUser) {
+        userInfo.style.display = 'flex';
+        userName.textContent = currentUser.name;
+        userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+        logoutBtn.style.display = 'block';
+        loginBtn.style.display = 'none';
+        signupBtn.style.display = 'none';
+        
+        showNotification(`Welcome back, ${currentUser.name}!`, 'success');
+      } else {
+        userInfo.style.display = 'none';
+        logoutBtn.style.display = 'none';
+        loginBtn.style.display = 'block';
+        signupBtn.style.display = 'block';
+      }
+    }
+
+    // Login function
+    function login() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      if (!username || !password) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+      }
+
+      // For demo purposes - in real app, this would be server-side validation
+      const users = JSON.parse(localStorage.getItem('gobinda_users') || '[]');
+      const user = users.find(u => 
+        (u.username === username || u.email === username) && u.password === password
+      );
+
+      if (user) {
+        currentUser = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          username: user.username,
+          role: user.role || 'user'
+        };
+        
+        localStorage.setItem('gobinda_user', JSON.stringify(currentUser));
+        closeLoginModal();
+        updateAuthUI();
+        showNotification('Login successful!', 'success');
+      } else {
+        showNotification('Invalid credentials', 'error');
+      }
+    }
+
+    // Signup function
+    function signup() {
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const username = document.getElementById('signupUsername').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+      if (!name || !email || !username || !password || !confirmPassword) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showNotification('Passwords do not match', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showNotification('Password must be at least 6 characters', 'error');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('gobinda_users') || '[]');
+      
+      // Check if user already exists
+      if (users.some(u => u.email === email)) {
+        showNotification('Email already registered', 'error');
+        return;
+      }
+      
+      if (users.some(u => u.username === username)) {
+        showNotification('Username already taken', 'error');
+        return;
+      }
+
+      const newUser = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        role: 'user',
+        createdAt: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('gobinda_users', JSON.stringify(users));
+      
+      currentUser = {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        username: newUser.username,
+        role: newUser.role
+      };
+      
+      localStorage.setItem('gobinda_user', JSON.stringify(currentUser));
+      closeSignupModal();
+      updateAuthUI();
+      showNotification('Account created successfully!', 'success');
+    }
+
+    // Logout function
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        currentUser = null;
+        localStorage.removeItem('gobinda_user');
+        updateAuthUI();
+        showNotification('Logged out successfully', 'info');
+      }
+    }
+
+    // Modal functions for auth
+    function openLoginModal() {
+      document.getElementById('loginModal').style.display = 'flex';
+      document.getElementById('loginUsername').focus();
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('loginUsername').value = '';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function openSignupModal() {
+      document.getElementById('signupModal').style.display = 'flex';
+      document.getElementById('signupName').focus();
+    }
+
+    function closeSignupModal() {
+      document.getElementById('signupModal').style.display = 'none';
+      document.getElementById('signupName').value = '';
+      document.getElementById('signupEmail').value = '';
+      document.getElementById('signupUsername').value = '';
+      document.getElementById('signupPassword').value = '';
+      document.getElementById('signupConfirmPassword').value = '';
+    }
+
+    function switchToSignup() {
+      closeLoginModal();
+      setTimeout(() => openSignupModal(), 300);
+    }
+
+    function switchToLogin() {
+      closeSignupModal();
+      setTimeout(() => openLoginModal(), 300);
+    }
+
+    // Notification system
+    function showNotification(message, type = 'info') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      
+      const colors = {
+        success: 'linear-gradient(45deg, #4CAF50, #2E7D32)',
+        error: 'linear-gradient(45deg, #f44336, #c62828)',
+        info: 'linear-gradient(45deg, #2196F3, #0D47A1)',
+        warning: 'linear-gradient(45deg, #ff9800, #f57c00)'
+      };
+      
+      notification.style.background = colors[type] || colors.info;
+      notification.style.display = 'block';
+      
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+
+    // Tab switching function
+    function switchTab(tabName) {
+      // Update top navigation
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Update main tabs
+      document.querySelectorAll('.main-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.tab === tabName) {
+          tab.classList.add('active');
+        }
+      });
+      
+      // Show corresponding content
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      
+      const contentId = tabName + 'Content';
+      const content = document.getElementById(contentId);
+      if (content) {
+        content.style.display = 'block';
+      }
+      
+      // Load specific content if needed
+      switch(tabName) {
+        case 'dashboard':
+          updateDashboard();
+          break;
+        case 'sales':
+          loadSalesTable();
+          break;
+      }
+    }
+
+    // Open settings function
+    function openSettings() {
+      document.getElementById('settingsModal').style.display = 'flex';
+    }
+
+    // ============ ORIGINAL APPLICATION CODE ============
+    // Initialize Application
+    function initializeApp() {
+      checkAuthStatus();
+      initializeTable();
+      loadAllSettings();
+      updateDashboard();
+      updateSummary();
+      initializeColumnSearch();
+      makeBalanceOldEditable();
+      setupTabNavigation();
+    }
+
+    // Setup Tab Navigation
+    function setupTabNavigation() {
+      const tabs = document.querySelectorAll('.main-tab');
+      const contents = {
+        dashboard: document.getElementById('dashboardContent'),
+        sales: document.getElementById('salesContent'),
+        stock: document.getElementById('stockContent'),
+        purchase: document.getElementById('purchaseContent'),
+        ledger: document.getElementById('ledgerContent'),
+        reports: document.getElementById('reportsContent')
+      };
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Hide all content sections
+          Object.values(contents).forEach(content => {
+            if (content) content.style.display = 'none';
+          });
+          
+          // Show selected content
+          const tabId = this.dataset.tab;
+          if (contents[tabId]) {
+            contents[tabId].style.display = 'block';
+          }
+          
+          // Load specific content if needed
+          switch(tabId) {
+            case 'dashboard':
+              updateDashboard();
+              break;
+            case 'sales':
+              loadSalesTable();
+              break;
+          }
+        });
+      });
+    }
+
+    // Load All Settings from localStorage
+    function loadAllSettings() {
+      const settings = [
+        { id: 'companyName', defaultValue: 'GOBINDA ENTERPRISE' },
+        { id: 'defaultAdvance', defaultValue: '200' },
+        { id: 'sizeCategories', defaultValue: 'Small,Medium,Large' },
+        { id: 'qualityGrades', defaultValue: 'A,B,C' },
+        { id: 'stockAlert', defaultValue: '50' },
+        { id: 'paymentDays', defaultValue: '7' },
+        { id: 'supplierBonus', defaultValue: '5' },
+        { id: 'exportMultiplier', defaultValue: '1.2' },
+        { id: 'autoInvoice', defaultValue: true, type: 'checkbox' },
+        { id: 'comPort', defaultValue: 'COM3' },
+        { id: 'autoWeight', defaultValue: false, type: 'checkbox' },
+        { id: 'xxlRate', defaultValue: '1200' },
+        { id: 'xlRate', defaultValue: '1000' },
+        { id: 'lRate', defaultValue: '800' },
+        { id: 'creditLimit', defaultValue: '50000' },
+        { id: 'dueAlertDays', defaultValue: '30' },
+        { id: 'storageTemp', defaultValue: '-18' },
+        { id: 'maxStorageDays', defaultValue: '90' },
+        { id: 'defaultCourier', defaultValue: 'Sundarban Courier' },
+        { id: 'autoTracking', defaultValue: true, type: 'checkbox' },
+        { id: 'minQuality', defaultValue: '7' },
+        { id: 'rejectThreshold', defaultValue: '10' },
+        { id: 'invoicePrefix', defaultValue: 'GOB-' },
+        { id: 'autoBackupDocs', defaultValue: true, type: 'checkbox' },
+        { id: 'staffCommission', defaultValue: '3' },
+        { id: 'workingHours', defaultValue: '8:00-17:00' },
+        { id: 'alertDays', defaultValue: '3' },
+        { id: 'smsAlert', defaultValue: true, type: 'checkbox' },
+        { id: 'emailAlert', defaultValue: false, type: 'checkbox' },
+        { id: 'profitTarget', defaultValue: '20' },
+        { id: 'autoReport', defaultValue: true, type: 'checkbox' },
+        { id: 'branchCode', defaultValue: 'BR001' },
+        { id: 'syncData', defaultValue: true, type: 'checkbox' },
+        { id: 'primaryColor', defaultValue: '#cfe5f5' },
+        { id: 'secondaryColor', defaultValue: '#ff0000' },
+        { id: 'websiteTitle', defaultValue: 'GOBINDA ENTERPRISE - Premium Crab & Fish Export' },
+        { id: 'backupHours', defaultValue: '24' },
+        { id: 'sessionTimeout', defaultValue: '30' },
+        { id: 'enableOTP', defaultValue: false, type: 'checkbox' },
+        { id: 'cloudBackup', defaultValue: true, type: 'checkbox' }
+      ];
+
+      settings.forEach(setting => {
+        const element = document.getElementById(setting.id);
+        if (element) {
+          if (setting.type === 'checkbox') {
+            element.checked = localStorage.getItem(setting.id) !== null 
+              ? localStorage.getItem(setting.id) === 'true' 
+              : setting.defaultValue;
+          } else {
+            element.value = localStorage.getItem(setting.id) || setting.defaultValue;
+          }
+        }
+      });
+
+      // Update company name in header
+      const companyName = document.getElementById('companyName').value;
+      document.querySelector('.logo-area h1').textContent = companyName;
+      document.title = document.getElementById('websiteTitle').value;
+
+      // Apply color scheme
+      applyColorScheme();
+    }
+
+    // Save All Settings to localStorage
+    function saveAllSettings() {
+      const settings = [
+        'companyName', 'defaultAdvance', 'sizeCategories', 'qualityGrades',
+        'stockAlert', 'paymentDays', 'supplierBonus', 'exportMultiplier',
+        'autoInvoice', 'comPort', 'autoWeight', 'xxlRate', 'xlRate', 'lRate',
+        'creditLimit', 'dueAlertDays', 'storageTemp', 'maxStorageDays',
+        'defaultCourier', 'autoTracking', 'minQuality', 'rejectThreshold',
+        'invoicePrefix', 'autoBackupDocs', 'staffCommission', 'workingHours',
+        'alertDays', 'smsAlert', 'emailAlert', 'profitTarget', 'autoReport',
+        'branchCode', 'syncData', 'primaryColor', 'secondaryColor', 'websiteTitle',
+        'backupHours', 'sessionTimeout', 'enableOTP', 'cloudBackup'
+      ];
+
+      settings.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          if (element.type === 'checkbox') {
+            localStorage.setItem(id, element.checked);
+          } else {
+            localStorage.setItem(id, element.value);
+          }
+        }
+      });
+
+      // Update display
+      const companyName = document.getElementById('companyName').value;
+      document.querySelector('.logo-area h1').textContent = companyName;
+      document.title = document.getElementById('websiteTitle').value;
+
+      applyColorScheme();
+      showNotification('All settings saved successfully!', 'success');
+    }
+
+    // Apply Color Scheme
+    function applyColorScheme() {
+      const primaryColor = document.getElementById('primaryColor').value;
+      const secondaryColor = document.getElementById('secondaryColor').value;
+      
+      document.querySelector('.header').style.background = primaryColor;
+      document.querySelector('.action-buttons').style.background = primaryColor;
+      document.querySelector('.search-container').style.background = primaryColor;
+      document.querySelector('.tabs-container').style.background = primaryColor;
+      
+      document.querySelector('.logo-area h1').style.color = secondaryColor;
+      
+      document.querySelectorAll('.tab.active').forEach(tab => {
+        tab.style.background = primaryColor;
+      });
+      
+      document.querySelectorAll('.main-tab.active').forEach(tab => {
+        tab.style.background = primaryColor;
+      });
+    }
+
+    // Update Dashboard
+    function updateDashboard() {
+      // Calculate dashboard values from tableData
+      const today = new Date().toISOString().split('T')[0];
+      
+      dashboardData.todaySales = tableData
+        .filter(row => row.date === today && row.totalPrice > 0)
+        .reduce((sum, row) => sum + row.totalPrice, 0);
+      
+      dashboardData.todayWeight = tableData
+        .filter(row => row.date === today)
+        .reduce((sum, row) => sum + row.totalWeat, 0);
+      
+      dashboardData.pendingPayment = tableData
+        .filter(row => row.advanceMoney < row.totalPrice)
+        .reduce((sum, row) => sum + (row.totalPrice - row.advanceMoney), 0);
+      
+      dashboardData.totalCustomer = new Set(tableData.map(row => row.name)).size;
+      
+      dashboardData.currentStock = tableData
+        .reduce((sum, row) => sum + row.totalWeat, 0);
+      
+      dashboardData.todayProfit = dashboardData.todaySales * 0.15; // 15% profit margin
+      
+      dashboardData.stockAlertValue = dashboardData.currentStock < 
+        parseFloat(document.getElementById('stockAlert').value || 50) ? 1 : 0;
+      
+      // Update dashboard display
+      document.getElementById('todaySales').textContent = dashboardData.todaySales.toFixed(2);
+      document.getElementById('todayWeight').textContent = dashboardData.todayWeight.toFixed(2) + ' Kg';
+      document.getElementById('todayProfit').textContent = dashboardData.todayProfit.toFixed(2);
+      document.getElementById('pendingPayment').textContent = dashboardData.pendingPayment.toFixed(2);
+      document.getElementById('totalCustomer').textContent = dashboardData.totalCustomer;
+      document.getElementById('stockAlertValue').textContent = dashboardData.stockAlertValue + ' Items';
+      document.getElementById('currentStock').textContent = dashboardData.currentStock.toFixed(2) + ' Kg';
+      
+      // Update recent transactions
+      updateRecentTransactions();
+    }
+
+    // Update Recent Transactions
+    function updateRecentTransactions() {
+      recentTransactionsBody.innerHTML = '';
+      
+      if (tableData.length === 0) {
+        recentTransactionsBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No recent transactions</td></tr>';
+        return;
+      }
+      
+      const recent = tableData
+        .filter(row => row.totalPrice > 0)
+        .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+        .slice(0, 10);
+      
+      recent.forEach(row => {
+        const tr = document.createElement('tr');
+        const status = row.advanceMoney >= row.totalPrice ? 'Completed' : 'Pending';
+        const statusClass = status === 'Completed' ? 'status-completed' : 'status-pending';
+        
+        tr.innerHTML = `
+          <td>${row.date || 'N/A'}</td>
+          <td>Sale</td>
+          <td>${row.name || 'Unknown'}</td>
+          <td>${row.totalWeat.toFixed(2)} Kg</td>
+          <td>${row.totalPrice.toFixed(2)}</td>
+          <td><span class="${statusClass}">${status}</span></td>
+        `;
+        recentTransactionsBody.appendChild(tr);
+      });
+    }
+
+    // Initialize Table with 20 rows
+    function initializeTable() {
+      body.innerHTML = '';
+      tableData = [];
+      
+      const defaultAdvance = localStorage.getItem('defaultAdvance') || 200;
+      
+      for (let i = 1; i <= 20; i++) {
+        const rowData = {
+          sl: i,
+          code: '',
+          name: '',
+          date: '',
+          xxlWeat: '',
+          xxlRate: '',
+          xlWeat: '',
+          xlRate: '',
+          lWeat: '',
+          lRate: '',
+          totalWeat: 0,
+          totalPrice: 0,
+          advanceMoney: parseFloat(defaultAdvance),
+          isEditing: false
+        };
+        
+        const tr = document.createElement("tr");
+        tr.dataset.index = i - 1;
+
+        tr.innerHTML = `
+          <td>${i}</td>
+          <td><input type="text" class="code" value="${rowData.code}" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="text" class="name" value="${rowData.name}" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="date" class="date" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xxl-weat" value="${rowData.xxlWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xxl-rate" value="${rowData.xxlRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xl-weat" value="${rowData.xlWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xl-rate" value="${rowData.xlRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="l-weat" value="${rowData.lWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="l-rate" value="${rowData.lRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td class="row-total-weat">0</td>
+          <td class="row-total-price">0</td>
+          <td><input type="number" class="advance" value="${rowData.advanceMoney}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td>
+            <div class="row-actions">
+              <button class="row-save" style="display: none;">💾</button>
+              <button class="row-edit">✏️</button>
+              <button class="row-delete">🗑️</button>
+            </div>
+          </td>
+        `;
+
+        body.appendChild(tr);
+        tableData.push(rowData);
+        
+        // Add event listeners
+        const inputs = tr.querySelectorAll('input');
+        inputs.forEach(input => {
+          input.addEventListener('input', () => {
+            updateRowCalculations(i - 1);
+            updateDashboard();
+            updateSummary();
+          });
+        });
+
+        // Row action buttons
+        const rowSaveBtn = tr.querySelector('.row-save');
+        const rowEditBtn = tr.querySelector('.row-edit');
+        const rowDeleteBtn = tr.querySelector('.row-delete');
+
+        rowEditBtn.addEventListener('click', () => enableRowEditing(i - 1));
+        rowSaveBtn.addEventListener('click', () => saveRow(i - 1));
+        rowDeleteBtn.addEventListener('click', () => showDeleteConfirmation(i - 1, false));
+      }
+    }
+
+    // Make Balance Old Money Editable
+    function makeBalanceOldEditable() {
+      const balanceOldBox = document.getElementById('balanceOld');
+      
+      balanceOldBox.addEventListener('click', function() {
+        const currentValue = balanceCustomerOldMoney.toFixed(2);
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.className = 'balance-old-input';
+        input.value = currentValue;
+        input.step = '0.01';
+        input.min = '0';
+        
+        this.innerHTML = '';
+        this.appendChild(input);
+        input.focus();
+        input.select();
+        
+        function saveBalanceOldValue() {
+          const newValue = parseFloat(input.value) || 0;
+          balanceCustomerOldMoney = newValue;
+          this.textContent = newValue.toFixed(2);
+          updateSummary();
+        }
+        
+        input.addEventListener('blur', saveBalanceOldValue.bind(this));
+        input.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') saveBalanceOldValue.call(balanceOldBox);
+        });
+      });
+    }
+
+    // Enable Row Editing
+    function enableRowEditing(rowIndex) {
+      const row = body.children[rowIndex];
+      const inputs = row.querySelectorAll('input');
+      inputs.forEach(input => input.disabled = false);
+      
+      const saveBtn = row.querySelector('.row-save');
+      const editBtn = row.querySelector('.row-edit');
+      saveBtn.style.display = 'block';
+      editBtn.style.display = 'none';
+      
+      tableData[rowIndex].isEditing = true;
+    }
+
+    // Save Row
+    function saveRow(rowIndex) {
+      const row = body.children[rowIndex];
+      const inputs = row.querySelectorAll('input');
+      inputs.forEach(input => input.disabled = true);
+      
+      const saveBtn = row.querySelector('.row-save');
+      const editBtn = row.querySelector('.row-edit');
+      saveBtn.style.display = 'none';
+      editBtn.style.display = 'block';
+      
+      updateRowCalculations(rowIndex);
+      tableData[rowIndex].isEditing = false;
+      showNotification('Row saved successfully!', 'success');
+    }
+
+    // Update Row Calculations
+    function updateRowCalculations(rowIndex) {
+      const row = body.children[rowIndex];
+      const data = tableData[rowIndex];
+      
+      data.xxlWeat = parseFloat(row.querySelector('.xxl-weat').value) || 0;
+      data.xxlRate = parseFloat(row.querySelector('.xxl-rate').value) || 0;
+      data.xlWeat = parseFloat(row.querySelector('.xl-weat').value) || 0;
+      data.xlRate = parseFloat(row.querySelector('.xl-rate').value) || 0;
+      data.lWeat = parseFloat(row.querySelector('.l-weat').value) || 0;
+      data.lRate = parseFloat(row.querySelector('.l-rate').value) || 0;
+      data.advanceMoney = parseFloat(row.querySelector('.advance').value) || 0;
+      data.code = row.querySelector('.code').value;
+      data.name = row.querySelector('.name').value;
+      data.date = row.querySelector('.date').value;
+      
+      const xxlTotal = data.xxlWeat * data.xxlRate;
+      const xlTotal = data.xlWeat * data.xlRate;
+      const lTotal = data.lWeat * data.lRate;
+      
+      data.totalWeat = data.xxlWeat + data.xlWeat + data.lWeat;
+      data.totalPrice = xxlTotal + xlTotal + lTotal;
+      
+      if (row.querySelector('.row-total-weat')) {
+        row.querySelector('.row-total-weat').textContent = data.totalWeat.toFixed(2);
+      }
+      if (row.querySelector('.row-total-price')) {
+        row.querySelector('.row-total-price').textContent = data.totalPrice.toFixed(2);
+      }
+    }
+
+    // Update Summary
+    function updateSummary() {
+      let totalWeat = 0;
+      let totalPrice = 0;
+      let totalAdvance = 0;
+      
+      tableData.forEach(data => {
+        totalWeat += data.totalWeat;
+        totalPrice += data.totalPrice;
+        totalAdvance += data.advanceMoney;
+      });
+      
+      const balanceAmount = totalAdvance - totalPrice;
+      const nowBalance = balanceAmount + balanceCustomerOldMoney;
+      
+      document.getElementById('totalWeat').textContent = totalWeat.toFixed(2);
+      document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+      document.getElementById('totalAdvance').textContent = totalAdvance.toFixed(2);
+      document.getElementById('balanceOld').textContent = balanceCustomerOldMoney.toFixed(2);
+      document.getElementById('balanceAmount').textContent = balanceAmount.toFixed(2);
+      document.getElementById('nowBalance').textContent = nowBalance.toFixed(2);
+    }
+
+    // Delete Row
+    function deleteRow(rowIndex) {
+      tableData.splice(rowIndex, 1);
+      tableData.forEach((row, index) => row.sl = index + 1);
+      renderTable();
+      updateSummary();
+      updateDashboard();
+    }
+
+    // Render Table
+    function renderTable() {
+      body.innerHTML = '';
+      
+      tableData.forEach((rowData, index) => {
+        const tr = document.createElement("tr");
+        tr.dataset.index = index;
+
+        tr.innerHTML = `
+          <td>${rowData.sl}</td>
+          <td><input type="text" class="code" value="${rowData.code}" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="text" class="name" value="${rowData.name}" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="date" class="date" value="${rowData.date}" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xxl-weat" value="${rowData.xxlWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xxl-rate" value="${rowData.xxlRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xl-weat" value="${rowData.xlWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="xl-rate" value="${rowData.xlRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="l-weat" value="${rowData.lWeat}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td><input type="number" class="l-rate" value="${rowData.lRate}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td class="row-total-weat">${rowData.totalWeat.toFixed(2)}</td>
+          <td class="row-total-price">${rowData.totalPrice.toFixed(2)}</td>
+          <td><input type="number" class="advance" value="${rowData.advanceMoney}" min="0" step="0.01" ${!rowData.isEditing ? 'disabled' : ''}></td>
+          <td>
+            <div class="row-actions">
+              <button class="row-save" style="${rowData.isEditing ? 'display: block;' : 'display: none;'}">💾</button>
+              <button class="row-edit" style="${rowData.isEditing ? 'display: none;' : 'display: block;'}">✏️</button>
+              <button class="row-delete">🗑️</button>
+            </div>
+          </td>
+        `;
+
+        body.appendChild(tr);
+        
+        const inputs = tr.querySelectorAll('input');
+        inputs.forEach(input => {
+          input.addEventListener('input', () => {
+            updateRowCalculations(index);
+            updateDashboard();
+            updateSummary();
+          });
+        });
+
+        const rowSaveBtn = tr.querySelector('.row-save');
+        const rowEditBtn = tr.querySelector('.row-edit');
+        const rowDeleteBtn = tr.querySelector('.row-delete');
+
+        rowEditBtn.addEventListener('click', () => enableRowEditing(index));
+        rowSaveBtn.addEventListener('click', () => saveRow(index));
+        rowDeleteBtn.addEventListener('click', () => showDeleteConfirmation(index, false));
+      });
+      
+      applyAllFilters();
+    }
+
+    // Filter Functions
+    function rowMatchesFilters(rowData, rowElement, index) {
+      const mainSearchTerm = searchInput.value.toLowerCase();
+      if (mainSearchTerm) {
+        let rowText = '';
+        const cells = rowElement.querySelectorAll('td');
+        cells.forEach(cell => {
+          const input = cell.querySelector('input');
+          rowText += input ? input.value.toLowerCase() + ' ' : cell.textContent.toLowerCase() + ' ';
+        });
+        if (!rowText.includes(mainSearchTerm)) return false;
+      }
+      
+      for (const [columnIndex, filterValue] of Object.entries(columnFilters)) {
+        if (!filterValue) continue;
+        const colIdx = parseInt(columnIndex);
+        const searchTerm = filterValue.toLowerCase();
+        let cellValue = '';
+        
+        switch(colIdx) {
+          case 0: cellValue = rowData.sl.toString(); break;
+          case 1: cellValue = rowData.code || ''; break;
+          case 2: cellValue = rowData.name || ''; break;
+          case 3: cellValue = rowData.date || ''; break;
+          case 4: cellValue = rowData.xxlWeat.toString(); break;
+          case 5: cellValue = rowData.xxlRate.toString(); break;
+          case 6: cellValue = rowData.xlWeat.toString(); break;
+          case 7: cellValue = rowData.xlRate.toString(); break;
+          case 8: cellValue = rowData.lWeat.toString(); break;
+          case 9: cellValue = rowData.lRate.toString(); break;
+          case 10: cellValue = rowData.totalWeat.toFixed(2); break;
+          case 11: cellValue = rowData.totalPrice.toFixed(2); break;
+          case 12: cellValue = rowData.advanceMoney.toFixed(2); break;
+        }
+        
+        if (!cellValue.toLowerCase().includes(searchTerm)) return false;
+      }
+      return true;
+    }
+
+    function applyAllFilters() {
+      const rows = body.querySelectorAll('tr');
+      rows.forEach((row, index) => {
+        const rowData = tableData[index];
+        if (!rowData) return;
+        const matches = rowMatchesFilters(rowData, row, index);
+        row.style.display = matches ? '' : 'none';
+        matches ? row.classList.add('row-match') : row.classList.remove('row-match');
+      });
+    }
+
+    // Initialize Column Search
+    function initializeColumnSearch() {
+      const columnSearchInputs = document.querySelectorAll('.column-search');
+      columnSearchInputs.forEach(input => {
+        input.addEventListener('input', function() {
+          const columnIndex = this.dataset.column;
+          const value = this.value.trim();
+          value ? columnFilters[columnIndex] = value : delete columnFilters[columnIndex];
+          applyAllFilters();
+        });
+      });
+      
+      document.getElementById('clearFilters').addEventListener('click', function() {
+        columnSearchInputs.forEach(input => input.value = '');
+        columnFilters = {};
+        searchInput.value = '';
+        applyAllFilters();
+      });
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', applyAllFilters);
+
+    document.getElementById('saveAllBtn').addEventListener('click', function() {
+      tableData.forEach((row, index) => {
+        if (row.isEditing) saveRow(index);
+      });
+      showNotification('All rows saved successfully!', 'success');
+    });
+
+    document.getElementById('editAllBtn').addEventListener('click', function() {
+      tableData.forEach((row, index) => {
+        if (!row.isEditing) enableRowEditing(index);
+      });
+      showNotification('All rows are now editable!', 'info');
+    });
+
+    document.getElementById('deleteAllBtn').addEventListener('click', function() {
+      showDeleteConfirmation(null, true);
+    });
+
+    // Delete Confirmation Modal
+    const deleteModal = document.getElementById('deleteModal');
+    const confirmDelete = document.getElementById('confirmDelete');
+    const cancelDelete = document.getElementById('cancelDelete');
+
+    function showDeleteConfirmation(rowIndex, isAll = false) {
+      const deleteMessage = document.getElementById('deleteMessage');
+      deleteMessage.textContent = isAll 
+        ? 'Are you sure you want to delete ALL records? This action cannot be undone.'
+        : `Are you sure you want to delete row ${rowIndex + 1}?`;
+      
+      deleteModal.style.display = 'flex';
+      deleteCallback = () => {
+        isAll ? deleteAllRows() : deleteRow(rowIndex);
+        deleteModal.style.display = 'none';
+      };
+    }
+
+    function deleteAllRows() {
+      tableData = [];
+      renderTable();
+      updateSummary();
+      updateDashboard();
+      showNotification('All records deleted successfully!', 'warning');
+    }
+
+    confirmDelete.addEventListener('click', () => deleteCallback && deleteCallback());
+    cancelDelete.addEventListener('click', () => deleteModal.style.display = 'none');
+
+    // PDF Download Function
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to export PDF', 'error');
+        return;
+      }
+      
+      let pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${document.getElementById('companyName').value} Report</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; padding: 10px; }
+            h1 { color: red; text-align: center; margin-bottom: 20px; }
+            h2 { color: #333; border-bottom: 2px solid #000; padding-bottom: 5px; margin-top: 30px; }
+            .summary-pdf { background: #fff2cc; border: 2px solid #000; padding: 15px; margin: 20px 0; width: 100%; }
+            .summary-row-pdf { display: flex; justify-content: space-between; margin: 8px 0; padding: 8px 5px; border-bottom: 1px solid #000; }
+            .summary-row-pdf:last-child { border-bottom: none; }
+            .summary-label-pdf { font-weight: bold; color: #000; font-size: 16px; }
+            .summary-value-pdf { font-weight: bold; color: #333; text-align: right; min-width: 120px; font-size: 16px; }
+            .table-pdf { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }
+            .table-pdf th, .table-pdf td { border: 1px solid #000; padding: 8px; text-align: center; }
+            .table-pdf th { background: yellow; font-weight: bold; }
+            .table-pdf tr:nth-child(even) { background: #f9f9f9; }
+            .footer { text-align: center; margin-top: 40px; color: #666; font-size: 14px; border-top: 1px solid #000; padding-top: 20px; }
+            .date-info { text-align: center; margin-bottom: 20px; font-size: 14px; }
+          </style>
+        </head>
+        <body>
+          <h1>${document.getElementById('companyName').value}</h1>
+          <div class="date-info">Report Date: ${new Date().toLocaleDateString()}</div>
+          
+          <h2>SUMMARY</h2>
+          <div class="summary-pdf">
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Total Weat:</span><span class="summary-value-pdf">${document.getElementById('totalWeat').textContent}</span></div>
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Total Price:</span><span class="summary-value-pdf">${document.getElementById('totalPrice').textContent}</span></div>
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Advance Money:</span><span class="summary-value-pdf">${document.getElementById('totalAdvance').textContent}</span></div>
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Balance Customer Old Money:</span><span class="summary-value-pdf">${document.getElementById('balanceOld').textContent}</span></div>
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Balance Amount:</span><span class="summary-value-pdf">${document.getElementById('balanceAmount').textContent}</span></div>
+            <div class="summary-row-pdf"><span class="summary-label-pdf">Now Balance Amount:</span><span class="summary-value-pdf">${document.getElementById('nowBalance').textContent}</span></div>
+          </div>
+          
+          <h2>TRANSACTION DETAILS</h2>
+          <table class="table-pdf">
+            <thead><tr><th>SL</th><th>CODE</th><th>NAME</th><th>DATE</th><th>XXL WEAT</th><th>XXL RATE</th><th>XL WEAT</th><th>XL RATE</th><th>L WEAT</th><th>L RATE</th><th>Total Weat</th><th>Total Price</th><th>Advance</th></tr></thead>
+            <tbody>`;
+      
+      tableData.forEach(row => {
+        if (row.totalWeat > 0 || row.totalPrice > 0 || row.code || row.name) {
+          pdfContent += `
+            <tr>
+              <td>${row.sl}</td>
+              <td>${row.code || ''}</td>
+              <td>${row.name || ''}</td>
+              <td>${row.date || ''}</td>
+              <td>${row.xxlWeat.toFixed(2)}</td>
+              <td>${row.xxlRate.toFixed(2)}</td>
+              <td>${row.xlWeat.toFixed(2)}</td>
+              <td>${row.xlRate.toFixed(2)}</td>
+              <td>${row.lWeat.toFixed(2)}</td>
+              <td>${row.lRate.toFixed(2)}</td>
+              <td>${row.totalWeat.toFixed(2)}</td>
+              <td>${row.totalPrice.toFixed(2)}</td>
+              <td>${row.advanceMoney.toFixed(2)}</td>
+            </tr>`;
+        }
+      });
+      
+      pdfContent += `
+            </tbody>
+          </table>
+          <div class="footer">
+            <p>Generated on: ${new Date().toLocaleString()}</p>
+            <p>${document.getElementById('companyName').value} © ${new Date().getFullYear()}</p>
+            <p>Generated by: ${currentUser ? currentUser.name : 'Guest'}</p>
+          </div>
+        </body>
+        </html>`;
+      
+      const blob = new Blob([pdfContent], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const newWindow = window.open(url, '_blank');
+      setTimeout(() => newWindow && newWindow.print(), 500);
+    });
+
+    // Excel Download
+    document.getElementById('excelBtn').addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to export Excel', 'error');
+        return;
+      }
+      
+      let csvContent = `${document.getElementById('companyName').value} REPORT\r\n`;
+      csvContent += `Report Date:,${new Date().toLocaleDateString()}\r\n\r\nSUMMARY\r\nDescription,Amount\r\n`;
+      csvContent += `Total Weat,${document.getElementById('totalWeat').textContent}\r\n`;
+      csvContent += `Total Price,${document.getElementById('totalPrice').textContent}\r\n`;
+      csvContent += `Advance Money,${document.getElementById('totalAdvance').textContent}\r\n`;
+      csvContent += `Balance Customer Old Money,${document.getElementById('balanceOld').textContent}\r\n`;
+      csvContent += `Balance Amount,${document.getElementById('balanceAmount').textContent}\r\n`;
+      csvContent += `Now Balance Amount,${document.getElementById('nowBalance').textContent}\r\n\r\nTRANSACTION DETAILS\r\n`;
+      csvContent += "SL NUMBER,CODE NUMBER,NAME,DATE,XXL WEAT,XXL RATE,XL WEAT,XL RATE,L WEAT,L RATE,Total Weat,Total Price,Advance Money\r\n";
+      
+      tableData.forEach(row => {
+        const rowData = [
+          row.sl,
+          `"${row.code || ''}"`,
+          `"${row.name || ''}"`,
+          `"${row.date || ''}"`,
+          row.xxlWeat.toFixed(2),
+          row.xxlRate.toFixed(2),
+          row.xlWeat.toFixed(2),
+          row.xlRate.toFixed(2),
+          row.lWeat.toFixed(2),
+          row.lRate.toFixed(2),
+          row.totalWeat.toFixed(2),
+          row.totalPrice.toFixed(2),
+          row.advanceMoney.toFixed(2)
+        ];
+        csvContent += rowData.join(',') + '\r\n';
+      });
+      
+      const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      const today = new Date();
+      const dateStr = today.getFullYear() + '-' + 
+                     String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                     String(today.getDate()).padStart(2, '0');
+      
+      link.href = url;
+      link.download = `${document.getElementById('companyName').value.replace(/\s+/g, '_')}_${dateStr}.csv`;
+      
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }, 100);
+    });
+
+    // Settings Modal
+    const settingsModal = document.getElementById('settingsModal');
+    const settingBtn = document.getElementById('settingBtn');
+    const closeSettings = document.getElementById('closeSettings');
+    const saveSettings = document.getElementById('saveSettings');
+    const loadDefaults = document.getElementById('loadDefaults');
+
+    // Load saved settings on page load
+    window.addEventListener('load', initializeApp);
+
+    // Open settings modal
+    settingBtn.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to access settings', 'error');
+        return;
+      }
+      settingsModal.style.display = 'flex';
+    });
+
+    // Close settings modal
+    closeSettings.addEventListener('click', function() {
+      settingsModal.style.display = 'none';
+    });
+
+    // Save settings
+    saveSettings.addEventListener('click', saveAllSettings);
+
+    // Load default settings
+    loadDefaults.addEventListener('click', function() {
+      if (confirm('Are you sure you want to load default settings? This will override your current settings.')) {
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+          if (!key.includes('gobinda_user') && !key.includes('gobinda_users')) {
+            localStorage.removeItem(key);
+          }
+        });
+        loadAllSettings();
+        showNotification('Default settings loaded successfully!', 'success');
+      }
+    });
+
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target === settingsModal) settingsModal.style.display = 'none';
+      if (event.target === deleteModal) deleteModal.style.display = 'none';
+      if (event.target === document.getElementById('loginModal')) closeLoginModal();
+      if (event.target === document.getElementById('signupModal')) closeSignupModal();
+    });
+
+    // Other button functionalities
+    document.getElementById('newAddBtn').addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add new records', 'error');
+        return;
+      }
+      
+      const newIndex = tableData.length + 1;
+      const defaultAdvance = localStorage.getItem('defaultAdvance') || 200;
+      
+      const newRowData = {
+        sl: newIndex,
+        code: '',
+        name: '',
+        date: '',
+        xxlWeat: '',
+        xxlRate: '',
+        xlWeat: '',
+        xlRate: '',
+        lWeat: '',
+        lRate: '',
+        totalWeat: 0,
+        totalPrice: 0,
+        advanceMoney: parseFloat(defaultAdvance),
+        isEditing: false
+      };
+      
+      tableData.push(newRowData);
+      renderTable();
+      updateSummary();
+      updateDashboard();
+      enableRowEditing(tableData.length - 1);
+      showNotification('New row added successfully!', 'success');
+    });
+
+    document.getElementById('reportBtn').addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to generate reports', 'error');
+        return;
+      }
+      window.print();
+    });
+
+    document.getElementById('printBtn').addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to print', 'error');
+        return;
+      }
+      window.print();
+    });
+
+    // Quick Action Buttons
+    document.getElementById('quickAddStock')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add stock', 'error');
+        return;
+      }
+      showNotification('Add Stock feature will be implemented soon!', 'info');
+    });
+
+    document.getElementById('quickAddCustomer')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add customers', 'error');
+        return;
+      }
+      showNotification('Add Customer feature will be implemented soon!', 'info');
+    });
+
+    document.getElementById('quickAddSupplier')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add suppliers', 'error');
+        return;
+      }
+      showNotification('Add Supplier feature will be implemented soon!', 'info');
+    });
+
+    document.getElementById('quickAddPurchase')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add purchases', 'error');
+        return;
+      }
+      showNotification('Add Purchase feature will be implemented soon!', 'info');
+    });
+
+    document.getElementById('quickAddSale')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to add sales', 'error');
+        return;
+      }
+      showNotification('Add Sale feature will be implemented soon!', 'info');
+    });
+
+    document.getElementById('quickViewReports')?.addEventListener('click', function() {
+      if (!currentUser) {
+        showNotification('Please login to view reports', 'error');
+        return;
+      }
+      switchTab('reports');
+    });
+
+    // Auto-save every 5 minutes
+    setInterval(() => {
+      if (localStorage.getItem('cloudBackup') === 'true') {
+        const backupData = {
+          tableData: tableData,
+          balanceCustomerOldMoney: balanceCustomerOldMoney,
+          settings: {},
+          timestamp: new Date().toISOString()
+        };
+        
+        // Save all settings
+        const settings = [
+          'companyName', 'defaultAdvance', 'sizeCategories', 'qualityGrades',
+          'stockAlert', 'paymentDays', 'supplierBonus', 'exportMultiplier',
+          'autoInvoice', 'comPort', 'autoWeight', 'xxlRate', 'xlRate', 'lRate',
+          'creditLimit', 'dueAlertDays', 'storageTemp', 'maxStorageDays',
+          'defaultCourier', 'autoTracking', 'minQuality', 'rejectThreshold',
+          'invoicePrefix', 'autoBackupDocs', 'staffCommission', 'workingHours',
+          'alertDays', 'smsAlert', 'emailAlert', 'profitTarget', 'autoReport',
+          'branchCode', 'syncData', 'primaryColor', 'secondaryColor', 'websiteTitle',
+          'backupHours', 'sessionTimeout', 'enableOTP', 'cloudBackup'
+        ];
+        
+        settings.forEach(id => {
+          const element = document.getElementById(id);
+          if (element) {
+            backupData.settings[id] = element.type === 'checkbox' ? element.checked : element.value;
+          }
+        });
+        
+        localStorage.setItem('backup_' + new Date().getTime(), JSON.stringify(backupData));
+        console.log('Auto-backup completed at ' + new Date().toLocaleTimeString());
+      }
+    }, 300000); // 5 minutes
+
+    // Apply default settings on first load
+    if (!localStorage.getItem('settingsLoaded')) {
+      saveAllSettings();
+      localStorage.setItem('settingsLoaded', 'true');
+    }
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLoginModal();
+        closeSignupModal();
+        settingsModal.style.display = 'none';
+        deleteModal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
